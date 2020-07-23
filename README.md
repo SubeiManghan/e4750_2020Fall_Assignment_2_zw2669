@@ -1,1 +1,1 @@
-# eecse4750-e4750_2020Fall_students_repo
+# e4750_2020Fall_students_repo
