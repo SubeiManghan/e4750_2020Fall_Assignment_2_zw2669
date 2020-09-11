@@ -70,6 +70,25 @@ For PyCUDA, the coding problem will involve your first practical encounter with 
 3. *(5 points)* Out of the two approaches explored in task-1 (PyOpenCL), which proved to be faster? Explore the PyOpenCL docs and source code to support your conclusions about the differences in execution time.
 
 4. *(7 points)* Of the different approaches explored in task-2 (PyCUDA), which method(s) proved the fastest? Explore the PyCUDA docs and source code and explain how/why: (a) Normal python syntax can be used to perform operations on gpuarrays; (b) gpuarray execution (non-naive method) is comparable to using `mem_alloc`. 
+
+## Submission Instructions
+
+The assignment submission must strictly follow the following directory tree:
+
+```
+.
+├── 4750HW1_mem_pocl.py
+├── 4750HW1_mem_pycu.py
+├── output_logs
+│   ├── 4750HW1_pocl.out
+│   └── 4750HW1_pycu.out
+├── plots
+│   ├── HW1_time_cuda.png
+│   └── HW1_time_pocl.png
+└── README.md
+
+2 directories, 7 files
+```
 ## Code Templates
 
 You **must** adhere to the template given in the starter code below - this is essential for all assignments to be graded fairly and equally. 
