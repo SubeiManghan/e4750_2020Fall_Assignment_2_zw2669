@@ -23,7 +23,7 @@ For PyCUDA:
 3. [gpuarrays](https://documen.tician.de/pycuda/array.html)
 
 
-## Programming Problem (75 points)
+## Programming Problem (80 points)
 
 ### Problem set up
 Consider two 1D vectors *A* and *B* of length **N**. The task is to write code for PyOpenCL and for PyCUDA which performs vector addition on those two vectors in multiple ways, which are differentiated in how they interact with device memory. The programming problem is divided into two tasks, one each for OpenCL and CUDA. Make sure you complete both by following the instructions exactly. 
