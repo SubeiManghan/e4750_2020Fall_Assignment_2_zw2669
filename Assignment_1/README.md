@@ -28,48 +28,49 @@ For PyCUDA:
 ### Problem set up
 Consider two 1D vectors *A* and *B* of length **N**. The task is to write code for PyOpenCL and for PyCUDA which performs vector addition on those two vectors in multiple ways, which are differentiated in how they interact with device memory. The programming problem is divided into two tasks, one each for OpenCL and CUDA. Make sure you complete both by following the instructions exactly. 
 
-#### Task-1: PyOpenCL (15 points)
+#### Task-1: PyOpenCL (30 points)
 
 For PyOpenCL, you have been provided with the kernel code along with the assignment template. Your task is to build this kernel and use it as the basis for two methods of vector addition. The methods involve different ways of interacting with device and host memory. Read the instructions below and follow them exactly to complete task-1 of this assignment:
 
 1. The kernel code for OpenCL is provided in the template at the end of this README file. 
 
-2. *(5 points)* Write a function to perform vector addition on *A* and *B* by using `pyopencl.array` to load your vectors to device memory. Time the execution of the operation only, excluding the memory transfer steps. 
+2. *(10 points)* Write a function to perform vector addition on *A* and *B* by using `pyopencl.array` to load your vectors to device memory. Time the execution of the operation only, excluding the memory transfer steps. 
 
-3. *(5 points)* Write a function to perform vector addition on *A* and *B* by using `pyopencl.Buffer` to load your vectors to device memory. Time the execution of the operation, excluding the memory transfer steps.  
+3. *(10 points)* Write a function to perform vector addition on *A* and *B* by using `pyopencl.Buffer` to load your vectors to device memory. Time the execution of the operation, excluding the memory transfer steps.  
 
-4. *(2.5 points)* Iteratively increase the length of the array by a factor, say **L**, *(L = 1,2,3,...,20)*. Start with an array size of 100,000 or more. Call the functions which you wrote one-by-one to perform vector addition on the two arrays and record the **average** running time for each function call.
+4. *(5 points)* Iteratively increase the length of the array by a factor, say **L**, *(L = 1,2,3,...,20)*. Start with an array size of 100,000 or more. Call the functions which you wrote one-by-one to perform vector addition on the two arrays and record the **average** running time for each function call.
 
-5. *(2.5 points)* Plot the **average** execution times against the increasing array size (in orders of **L**)
+5. *(5 points)* Plot the **average** execution times against the increasing array size (in orders of **L**)
 
 
-#### Task-2: PyCUDA (60 points)
+#### Task-2: PyCUDA (50 points)
 
 For PyCUDA, the coding problem will involve your first practical encounter with kernel codes, host-to-device memory transfers (and vice-versa), and certain key classes that PyCUDA provides for them. Read the instructions below carefully and complete your assignment as outlined:
 
-1. *(5 points)* Write the kernel code for vector addition. Keep in mind that you will be working with arrays much larger than the maximum blocksize accepted by modern Nvidia dGPUs (usually 1024). Start with an array size of 100,000 or more.
+1. *(10 points)* Write the kernel code for vector addition. Keep in mind that you will be working with arrays much larger than the maximum blocksize accepted by modern Nvidia dGPUs (usually 1024). Start with an array size of 100,000 or more.
 
-2. *(10 points)* Write a function to perform vector addition on *A* and *B* taking advantage of explicit memory allocation using `pycuda.driver.mem_alloc()`. Do not forget to retrieve the result from device memory using the appropriate PyCUDA function. Use `SourceModule` to compile the kernel which you defined earlier. Time the execution.
+2. *(8 points)* Write a function to perform vector addition on *A* and *B* taking advantage of explicit memory allocation using `pycuda.driver.mem_alloc()`. Do not forget to retrieve the result from device memory using the appropriate PyCUDA function. Use `SourceModule` to compile the kernel which you defined earlier. Time the execution.
 
-3. *(10 points)* Write a function to perform vector addition on *A* and *B* **without** explicit memory allocation. Use `SourceModule` to compile the kernel which you defined earlier. Time the execution.
+3. *(8 points)* Write a function to perform vector addition on *A* and *B* **without** explicit memory allocation. Use `SourceModule` to compile the kernel which you defined earlier. Time the execution.
 
 4. *(5 points)* Write a function to perform vector addition on *A* and *B* using the `gpuarray` class instead of allocating with `mem_alloc`. Use standard algebraic syntax to perform addition. Time the execution. 
 
-5. *(10 points)* Write a function to perform vector addition on *A* and *B* using the `gpuarray` class instead of allocating with `mem_alloc`. Use `SourceModule` to compile the kernel which you defined earlier. Time the execution.
+5. *(7 points)* Write a function to perform vector addition on *A* and *B* using the `gpuarray` class instead of allocating with `mem_alloc`. Use `SourceModule` to compile the kernel which you defined earlier. Time the execution.
 
-6. *(10 points)* Iteratively increase the length of the array by a factor, say **L**, *(L = 1,2,3,...,20)*. Call the functions you previously wrote one-by-one to perform vector addition on the two arrays, and record the **average** running time for each function call. 
+6. *(7 points)* Iteratively increase the length of the array by a factor, say **L**, *(L = 1,2,3,...,20)*. Call the functions you previously wrote one-by-one to perform vector addition on the two arrays, and record the **average** running time for each function call. 
 
-7. *(10 points)* Plot the **average** execution times against the increasing array size (in orders of **L**)
+7. *(5 points)* Plot the **average** execution times against the increasing array size (in orders of **L**)
 
 ## Theory Problems (20 points)
 
 1. *(3 points)* What is the difference between a thread, a task and a process?
 
-2. *(5 points)* Are all algorithms potentially scalable? (Expand question scope to cover Amdahl's Law?)
+2. *(3 points)* What are the differences between concurrency and parallelism?
 
-3. *(5 points)* Out of the two approaches explored in task-1 (PyOpenCL), which proved to be faster? Explore the PyOpenCL docs and source code to support your conclusions about the differences in execution time.
+3. *(7 points)* Out of the two approaches explored in task-1 (PyOpenCL), which proved to be faster? Explore the PyOpenCL docs and source code to support your conclusions about the differences in execution time.
 
-4. *(7 points)* Of the different approaches explored in task-2 (PyCUDA), which method(s) proved the fastest? Explore the PyCUDA docs and source code and explain how/why: (a) Normal python syntax can be used to perform operations on gpuarrays; (b) gpuarray execution (non-naive method) is comparable to using `mem_alloc`. 
+4. *(7 points)* Of the different approaches explored in task-2 (PyCUDA), which method(s) proved the fastest? Explore the PyCUDA docs and source code and explain how/why: (a) Normal python syntax can be used to perform operations on gpuarrays; (b) gpuarray execution (non-naive method) is comparable to using `mem_alloc`.
+
 
 ## Submission Instructions
 
