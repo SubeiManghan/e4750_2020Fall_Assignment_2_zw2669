@@ -2,7 +2,7 @@
 
 ## Assignment-1: Introduction to Memory Access in PyCUDA & PyOpenCL
 
-Due date: TBA
+Due date: 25th September, 2020
 
 Total points: 100
 
