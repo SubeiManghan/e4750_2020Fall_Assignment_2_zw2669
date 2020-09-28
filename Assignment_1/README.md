@@ -2,7 +2,7 @@
 
 ## Assignment-1: Introduction to Memory Access in PyCUDA & PyOpenCL
 
-Due date: 25th September, 2020
+Due date: ~~25th September, 2020~~ 1st October, 2020 11:59 PM
 
 Total points: 100
 
@@ -290,9 +290,8 @@ class deviceAdd:
     def gpuarrayAdd(self):
         """
         Function to perform on-device parallel vector addition
-        without explicitly allocating device memory for 
-        host variables and WITHOUT calling the kernel. The operation
-        is defined using numpy-like syntax. 
+        using the gpuarray class for memory allocation, along 
+        with SourceModule to invoke the kernel.
         Returns
             c                               :   addition result
             i_start.time_till(i_end)*(1e-3) :   execution time
