@@ -2,9 +2,18 @@
 
 ## Assignment-2: Deciphering Text and an Introduction to Profiling
 
-Due date: TBA (Tentatively 10th October 2020)
+Due date: 12th October, 2020 at *11:59 pm.*
 
 Total points: 100
+
+### To-do: GUI Installation and Introduction to CUDA Profiling
+
+Before attempting this assignment, please follow the two tutorials posted to the Github wiki:
+* [GUI Installation](wiki/VM-GUI-Setup)
+* [Intro to CUDA Profiling](wiki/Introduction-to-Profiling)
+
+Two demo videos for both topics have been posted to the Video Library on Courseworks.
+You will need the GUI installation and Profiling know-how to complete Tasks 2.6 and 2.7, which are worth a total of 20% of this assignment. 
 
 ### Primer
 
@@ -12,10 +21,19 @@ The goal of this assignment is to introduce complexity to the 1D array manipulat
 
 ### Relevant Documentation
 
-TBA
+You may refer to the following links for this assignment to get started:
+
+* [ROT-13 Cipher](https://en.wikipedia.org/wiki/ROT13)
+* [ROT-13 converter](https://rot13.com/)
 
 
-## Programming Problem (70 points)
+## Report (5 points)
+
+Starting with Assignment-2, you are expected to prepare a markdown report to go with your code submission. A demo report markdown has been provided with this assignment, with detailed instructions on how to populate it, along with some useful markdown syntax if you are unfamiliar with its use. 
+
+The GitHub wiki has also been updated with instructions for the homework report. You may check the sidebar to look for them.
+
+## Programming Problem (75 points)
 
 For this assignment, you have been given an encoded text file. Your task is to correctly decode it using appropriate CUDA and OpenCL kernels, along with a naive function using basic string manipulation in Python. While you will still be dealing with 1D arrays, the kernels you write will not be as primitive as they were in the first assignment. 
 
@@ -37,15 +55,15 @@ Consider the file `deciphertext.txt`. It contains text coded in ROT-13. All char
 
 Read the given text file and preprocess it according to the requirements in the steps below:
 
-1. *(8 points)* Write the kernel code for per-character conversion.
+1. *(7 points)* Write the kernel code for per-character conversion.
 
-2. *(7 points)* Write a function to decipher an input string using the kernel code. Time the execition of the entire operation (including memory transfers).
+2. *(8 points)* Write a function to decipher an input string using the kernel code. Time the execition of the entire operation (including memory transfers).
 
 3. *(5 points)* Write a function to decipher an input string using native python string manipulation. Time the execution of the entire operation. 
 
 4. *(5 points )* Call the kernel function and python function iteratively for every sentence in the input text. You can stitch the decrypted sentences back together into a unified output for each method. Finally, use Python's exception handling (`try` and `except`) to compare the two decryption results. If they are equal, only then write the decryption to a file in the assignment directory in `./results/decrypted_pocl.txt`
 
-5. *(5 points)* Save a scatter plot the of per-sentence execution time for both methods. (There are 23 sentences in total). Use `nohup` to write the output to file in `./output_logs/4750HW2_rot13_pocl.out` You can do this by issuing the following command in the terminal:
+5. *(5 points)* Save a dot-plot the of per-sentence execution time for both methods. (There are 23 sentences in total). Use `nohup` to write the output to file in `./output_logs/4750HW2_rot13_pocl.out` You can do this by issuing the following command in the terminal:
     ```bash
     $ nohup python 4750HW2_rot13_pocl.py > ./output_logs/4750HW2_rot13_pocl.out
     ```
@@ -62,7 +80,7 @@ Read the given text file and preprocess it according to the requirements in the 
 
 4. *(5 points )* Call the kernel function and python function iteratively for every sentence in the input text. You can stitch the decrypted sentences back together into a unified output for each method. Finally, use Python's exception handling (`try` and `except`) to compare the two decryption results. If they are equal, only then write the decryption to a file in the assignment directory in `./results/decrypted_pycu.txt`
 
-5. *(5 points)* Save a scatter plot the of per-sentence execution time for both methods. (There are 23 sentences in total). Use `nohup` to write the output to file in `./output_logs/4750HW2_rot13_pycu.out` You can do this by issuing the following command in the terminal:
+5. *(5 points)* Save a dot-plot the of per-sentence execution time for both methods. (There are 23 sentences in total). Use `nohup` to write the output to file in `./output_logs/4750HW2_rot13_pycu.out` You can do this by issuing the following command in the terminal:
     ```bash
     $ nohup python 4750HW2_rot13_pycu.py > ./output_logs/4750HW2_rot13_pycu.out
     ```
@@ -70,15 +88,40 @@ Read the given text file and preprocess it according to the requirements in the 
 6. *(10 points)* Use the Nvidia Visual Profiler (NVVP) to profile your CUDA kernel. You can do this by calling the first command below. The second command loads the profiling log to NVVP for viewing. 
     ```bash
     $ nvprof -o ./results/4750HW2_rot13_prof.nvprof python 4750HW2_rot13_pycu.py
-    $ nvvp ./results/4750HW2_rot13_prof.nvprof
+    $ viewprofile ./results/4750HW2_rot13_prof.nvprof
     ```
     Take screenshots of what you see, and note your observations in the report.
 
-7. *(10 points)* Based on the scatter plot, are all sentences deciphered in (roughly) equal time? If not, reason out why. Use the profiling output to explain the anomaly in execution time. 
+7. *(10 points)* Based on the dot-plot, are all sentences deciphered in (roughly) equal time? If not, reason out why. Use the profiling output to explain the anomaly in execution time. 
 
-## Theory Problems (30 points)
+### Deciphered Text (5 points)
+The conditions for a full score are:
+* The deciphered text matches the source text exactly, down to the spaces and punctuation. (i.e. total character count needs to be the same)
+* All words in every sentence are correctly decoded. 
 
-TBA
+No points for identifying where the coded text is from; but if you happen to know - go ahead and write that in your report!
+
+## Theory Problems (20 points)
+
+1. *(5 points)* What is code profiling? How might profiling prove useful for CUDA development?
+
+2. *(5 points)* If we need to use each thread to calculate one output element of a vector addition, what would be the expression for mapping the thread/block indices to data index: \
+(A) i=threadIdx.x + threadIdx.y; \
+(B) i=blockIdx.x + threadIdx.x; \
+(C) i=blockIdx.x*blockDim.x + threadIdx.x; \
+(D) i=blockIdx.x * threadIdx.x.
+
+3. *(5 points)* We want to use each thread to calculate two (adjacent) output elements of a vector addition. Assume that variable i should be the index for the first element to be processed by a thread. What would be the expression for mapping the thread/block indices to data index of the first element? \
+(A) i=blockIdx.xblockDim.x + threadIdx.x +2; \
+(B) i=blockIdx.xthreadIdx.x2; \
+(C) i=(blockIdx.xblockDim.x + threadIdx.x)2; \
+(D) i=blockIdx.xblockDim.x*2 + threadIdx.x.
+
+4. *(5 points)* For a vector addition, assume that the vector length is 8000, each thread calculates one output element, and the thread block size is 1024 threads. The programmer configures the kernel launch to have a minimal number of thread blocks to cover all output elements. How many threads will be in the grid? \
+(A) 8000 \
+(B) 8196 \
+(C) 8192 \
+(D) 8200
 
 ## Code Template
 
