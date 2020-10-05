@@ -9,8 +9,8 @@ Total points: 100
 ### To-do: GUI Installation and Introduction to CUDA Profiling
 
 Before attempting this assignment, please follow the two tutorials posted to the Github wiki:
-* [GUI Installation](wiki/VM-GUI-Setup)
-* [Intro to CUDA Profiling](wiki/Introduction-to-Profiling)
+* [GUI Installation](https://github.com/eecse4750/e4750_2020Fall_students_repo/wiki/VM-GUI-Setup)
+* [Intro to CUDA Profiling](https://github.com/eecse4750/e4750_2020Fall_students_repo/wiki/Introduction-to-Profiling)
 
 Two demo videos for both topics have been posted to the Video Library on Courseworks.
 You will need the GUI installation and Profiling know-how to complete Tasks 2.6 and 2.7, which are worth a total of 20% of this assignment. 
